@@ -6,7 +6,7 @@ var logger = require('koa-logger');
 var compress = require('koa-compress');
 var responseTime = require('koa-response-time');
 var limit = require('koa-better-ratelimit');
-var gbhandler = require('./src/handler/gb-handler.js');
+var gbhandler = require('./src/server/gb-handler.js');
 
 var compressOpts = {
     filter: function (content_type) {
