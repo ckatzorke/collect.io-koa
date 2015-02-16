@@ -18,9 +18,9 @@ exports.search = function *() {
 /**
  * derails
  */
-exports.detail = function *() {
-    if (this.request.query.id) {
-        var res = yield gb.detail(this.request.query.id);
+exports.detail = function *(id) {
+    if (id) {
+        var res = yield gb.detail(id);
         this.body = res;
     } else {
         this.response.status = 404;

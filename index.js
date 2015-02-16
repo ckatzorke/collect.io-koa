@@ -1,11 +1,9 @@
 var koa = require('koa');
 var app = koa();
-var router = require('koa-router');
-var mount = require('koa-mount');
+var route = require('koa-route');
 var logger = require('koa-logger');
 var compress = require('koa-compress');
 var responseTime = require('koa-response-time');
-var limit = require('koa-better-ratelimit');
 var gbhandler = require('./src/server/gb-handler.js');
 
 var compressOpts = {
@@ -34,19 +32,13 @@ app.use(function * (next) {
         this.app.emit('error', err, this);
     }
 });
-//limit
-app.use(limit({
-    duration: 1000 * 60 * 3, // 3 min
-    max: 10,
-    blacklist: []
-}));
 //logger
 app.use(logger());
 
 //games rest service
-var gb = new router();
-gb.get('/search', gbhandler.search);
-gb.get('/detail', gbhandler.detail);
-app.use(mount('/gb', gb.middleware()));
+app.use(route.get('/search', gbhandler.search));
+app.use(route.get('/detail/:id', gbhandler.detail));
+
 if (!module.parent) app.listen(3000);
+
 console.log('GB-koa is running on http://localhost:3000/');
