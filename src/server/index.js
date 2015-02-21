@@ -3,10 +3,11 @@
 var koa = require('koa');
 var app = koa();
 var route = require('koa-route');
+var static = require('koa-static');
 var logger = require('koa-logger');
 var compress = require('koa-compress');
 var responseTime = require('koa-response-time');
-var gbhandler = require('./src/server/gb-handler.js');
+var gbhandler = require('./handler/gb-handler.js');
 
 
 var compressOpts = {
@@ -40,11 +41,23 @@ app.use(function * (next) {
 //logger
 app.use(logger());
 
+//client renderer
+app.use(static('dist/www'));
+app.use(function *(next){
+  yield next;
+  if ('/' == this.path) {
+    this.body = __dirname;
+  }
+});
+
 //games rest service
-app.use(route.get('/search', gbhandler.search));
-app.use(route.get('/detail/:id', gbhandler.detail));
+//app.use(route.get('/service/search', gbhandler.search));
+//app.use(route.get('/service/detail/:id', gbhandler.detail));
+
 
 if (!module.parent) {
     app.listen(3000);
 }
-console.log('GB-koa is running on http://localhost:3000/');
+console.log('collect.io-koa is running on http://localhost:3000/');
+
+module.exports = app;

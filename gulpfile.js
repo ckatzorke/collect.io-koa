@@ -75,7 +75,7 @@ gulp.task('dist:client', ['hint' /*test...*/ ], function () {
 });
 gulp.task('dist:server', ['hint' /*test...*/ ], function () {
     'use strict';
-    return gulp.src('src/server/**/*.*').pipe(gulp.dest(distPath + '/server'));
+    return gulp.src('src/server/**/*.*').pipe(gulp.dest(distPath));
 });
 gulp.task('dist', ['dist:client', 'dist:server'],
     function () {
