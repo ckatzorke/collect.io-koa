@@ -11,6 +11,11 @@ var distPath = 'dist',
     wwwPath = 'dist/www',
     libPath = 'dist/www/lib';
 
+var paths = {
+    client: 'src/client/**/*.*',
+    server: 'src/server/**/*.js'
+};
+
 /*
  * clean
  */
@@ -84,9 +89,17 @@ gulp.task('dist', ['dist:client', 'dist:server'],
 
 
 /**
+ * watch
+ */
+gulp.task('watch', function() {
+  gulp.watch(paths.client, ['dist:client']);
+  gulp.watch(paths.server, ['dist:server']);
+});
+
+/**
  * default
  */
-gulp.task('default', ['clean', 'bowercopy', 'dist'], function () {
+gulp.task('default', ['watch', 'dist'], function () {
     'use strict';
     // default stuff
 });

@@ -51,8 +51,8 @@ app.use(function *(next){
 });
 
 //games rest service
-//app.use(route.get('/service/search', gbhandler.search));
-//app.use(route.get('/service/detail/:id', gbhandler.detail));
+app.use(route.get('/service/search', gbhandler.search));
+app.use(route.get('/service/detail/:id', gbhandler.detail));
 
 
 if (!module.parent) {
