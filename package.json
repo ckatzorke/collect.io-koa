@@ -2,8 +2,9 @@
   "name": "collect.io-koa",
   "version": "0.0.1",
   "description": "koa based collection application for games",
-  "main": "index.js",
+  "main": "dist/server/index.js",
   "scripts": {
+    "start": "iojs dist/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,13 @@
     "koa-logger": "^1.2.2",
     "koa-response-time": "^1.0.2",
     "koa-route": "^2.4.0"
+  },
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-bower": "0.0.10",
+    "gulp-jshint": "^1.9.2",
+    "jshint-stylish": "^1.0.0",
+    "vinyl-paths": "^1.0.0"
   }
 }

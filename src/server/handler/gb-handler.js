@@ -3,7 +3,8 @@
 'use strict';
 
 var apikey = require('./apikey');
-var gb = require('giantbomb-api')(apikey);
+var gb = require('giantbomb-api')(apikey
+                                 );
 /**
  * search
  */

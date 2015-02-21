@@ -1,3 +1,5 @@
+/*jslint node: true, nomen: true , esnext: true */
+
 var koa = require('koa');
 var app = koa();
 var route = require('koa-route');
@@ -6,9 +8,11 @@ var compress = require('koa-compress');
 var responseTime = require('koa-response-time');
 var gbhandler = require('./src/server/gb-handler.js');
 
+
 var compressOpts = {
-    filter: function (content_type) {
-        return /text/i.test(content_type) || /application\/json/i.test(content_type) || /application\/xml/i.test(content_type);
+    filter: function (contentType) {
+        'use strict';
+        return /text/i.test(contentType) || /application\/json/i.test(contentType) || /application\/xml/i.test(contentType);
     }, // filter requests to be compressed using regex 
     threshold: 2048, //minimum size to compress
     flush: require('zlib').Z_SYNC_FLUSH
@@ -20,6 +24,7 @@ app.use(responseTime());
 
 //error handler
 app.use(function * (next) {
+    'use strict';
     try {
         yield next;
     } catch (err) {
@@ -39,6 +44,7 @@ app.use(logger());
 app.use(route.get('/search', gbhandler.search));
 app.use(route.get('/detail/:id', gbhandler.detail));
 
-if (!module.parent) app.listen(3000);
-
+if (!module.parent) {
+    app.listen(3000);
+}
 console.log('GB-koa is running on http://localhost:3000/');
