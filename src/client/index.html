@@ -122,7 +122,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; collect.io 2015</p>
                 </div>
             </div>
         </footer>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for..." id="wishlistSearchInput">
+                        <input type="text" class="form-control" placeholder="Search for..." id="wishlistSearchInput" autofocus>
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" id="wishlistSearchBtn">Go!</button>
                         </span>
@@ -161,11 +161,14 @@
 
     <!-- search result templat -->
     <script id="searchresults-template" type="text/x-handlebars-template">
-        <ul>
+        <div class="list-group">
             {{#each results}}
-                <li title="{{deck}}">{{name}}</li>
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">{{name}}</h4>
+                <p class="list-group-item-text">{{deck}}</p>
+            </a>
             {{/each}}
-        </ul>
+        </div>
     </script>
 
     <!-- jQuery -->
