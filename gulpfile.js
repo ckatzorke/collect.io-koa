@@ -37,7 +37,7 @@ gulp.task('bower', function () {
 /**
  * Subtask for bowercopy - jQuery
  */
-gulp.task('bower-jquery-copy', ['bower'], function () {
+gulp.task('bowercopy:jquery', ['bower'], function () {
     'use strict';
     return gulp.src(['bower_components/jquery/dist/*']).pipe(
         gulp.dest(libPath + '/jquery'));
@@ -46,16 +46,24 @@ gulp.task('bower-jquery-copy', ['bower'], function () {
 /**
  * Subtask for bowercopy - bootstrap
  */
-gulp.task('bower-bootstrap-copy', ['bower'], function () {
+gulp.task('bowercopy:bootstrap', ['bower'], function () {
     'use strict';
     return gulp.src(['bower_components/bootstrap/dist/**/*']).pipe(
         gulp.dest(libPath + '/bootstrap'));
+});
+/**
+ * Subtask for bowercopy - handlebars
+ */
+gulp.task('bowercopy:handlebars', ['bower'], function () {
+    'use strict';
+    return gulp.src(['bower_components/handlebars/handlebars.min.js']).pipe(
+        gulp.dest(libPath + '/handlebars'));
 });
 
 /**
  * bowercopy - copy the dependencies from bower_components to lib
  */
-gulp.task('bowercopy', ['bower-jquery-copy', 'bower-bootstrap-copy'],
+gulp.task('bowercopy', ['bowercopy:jquery', 'bowercopy:bootstrap', 'bowercopy:handlebars'],
     function () {
         'use strict';
     });
@@ -91,9 +99,10 @@ gulp.task('dist', ['dist:client', 'dist:server'],
 /**
  * watch
  */
-gulp.task('watch', function() {
-  gulp.watch(paths.client, ['dist:client']);
-  gulp.watch(paths.server, ['dist:server']);
+gulp.task('watch', function () {
+    'use strict';
+    gulp.watch(paths.client, ['dist:client']);
+    gulp.watch(paths.server, ['dist:server']);
 });
 
 /**

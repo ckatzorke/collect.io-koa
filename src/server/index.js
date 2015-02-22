@@ -43,12 +43,7 @@ app.use(logger());
 
 //client renderer
 app.use(static('dist/www'));
-app.use(function *(next){
-  yield next;
-  if ('/' == this.path) {
-    this.body = __dirname;
-  }
-});
+
 
 //games rest service
 app.use(route.get('/service/search', gbhandler.search));
