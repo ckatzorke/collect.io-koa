@@ -1,4 +1,3 @@
-
 var quicksearch = (function ($) {
     var tSource = $('#searchresults-template').html();
     var template = Handlebars.compile(tSource);
@@ -6,15 +5,36 @@ var quicksearch = (function ($) {
         var value = $('#wishlistSearchInput').val();
         $.getJSON('/service/search?q=' + value, function (data) {
             console.log(data);
-            var resultHtml = template(data);
+            var resultHtml = data.results.length === 0 ? 'No results...' : template(data);
             console.log(resultHtml);
             $('#wishlist-searchresult').html(resultHtml);
         });
     };
     return {
-        search: search   
+        search: search
     }
 })(jQuery);
+
+var wishlist = (function ($) {
+    var tSource = $('#wishlist-entry-template').html();
+    var template = Handlebars.compile(tSource);
+    var add = function (id, name, thumb_url) {
+        var entry = {
+            'id': id,
+            'name': name,
+            'thumb': thumb_url
+        };
+        console.log("adding", entry);
+        $('#add2Wish').modal('hide');
+        var entryHtml = template(entry);
+        console.log('Entry HTML', entryHtml);
+        $('#addWishlistEntry').before(entryHtml);
+    };
+    return {
+        add: add
+    }
+})(jQuery);
+
 
 
 $(document).ready(function () {

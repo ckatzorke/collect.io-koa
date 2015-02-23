@@ -15,7 +15,7 @@
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/thumbnail-gallery.css" rel="stylesheet">
+    <link href="css/collectio.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,14 +44,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
+                    <li class="active">
+                        <a href="#">Wishlist</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="#">coming soon</a>
                     </li>
                 </ul>
             </div>
@@ -65,55 +62,27 @@
 
         <div class="row">
 
-            <div class="col-lg-12">
-                <h1 class="page-header">Your wishlist <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add2Wish"><span class="glyphicon glyphicon-plus"></span> Add</button></h1>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <div class="col-lg-2 col-md-2 col-xs-3">
                 <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <img class="img-responsive" src="http://static.giantbomb.com/uploads/scale_avatar/8/84290/2719577-rebirth21.jpg" alt="Hyperdimension Neptuinia Re;Birth 2" title="Hyperdimension Neptuinia Re;Birth 2">
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <div class="col-lg-2 col-md-2 col-xs-3">
                 <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <img class="img-responsive" src="http://static.giantbomb.com/uploads/scale_avatar/8/87790/2417183-box_aataod.png" alt="Atelier Ayesha: The Alchemist of Dusk" title="Atelier Ayesha: The Alchemist of Dusk">
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <div class="col-lg-2 col-md-2 col-xs-3">
                 <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    <img class="img-responsive" src="http://static.giantbomb.com/uploads/scale_avatar/0/3699/2666688-bloodborne+v3.jpg" alt="Bloodborne" title="Bloodborne">
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+            <div class="col-lg-2 col-md-2 col-xs-3" id="addWishlistEntry">
+                <a class="thumbnail" data-toggle="modal" data-target="#add2Wish" href="#" role="button">
+                    <img class="img-responsive" src="images/nocover.gif" alt="Add..." title="Add..." width="115px" height="170px">
                 </a>
             </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="#">
-                    <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                </a>
-            </div>
+            
         </div>
 
         <hr>
@@ -163,11 +132,20 @@
     <script id="searchresults-template" type="text/x-handlebars-template">
         <div class="list-group">
             {{#each results}}
-            <a href="#" class="list-group-item">
+            <a href="#" onclick="wishlist.add('{{id}}', '{{name}}', '{{image.thumb_url}}')" class="list-group-item">
                 <h4 class="list-group-item-heading">{{name}}</h4>
                 <p class="list-group-item-text">{{deck}}</p>
             </a>
             {{/each}}
+        </div>
+    </script>
+    
+    <!-- wishlist entry template -->
+    <script id="wishlist-entry-template" type="text/x-handlebars-template">
+         <div class="col-lg-2 col-md-2 col-xs-3">
+            <a class="thumbnail" href="#">
+                <img class="img-responsive" src="{{thumb}}" alt="{{name}}" title="{{name}}">
+            </a>
         </div>
     </script>
 
