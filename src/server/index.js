@@ -3,7 +3,7 @@
 var koa = require('koa');
 var app = koa();
 var route = require('koa-route');
-var static = require('koa-static');
+var serve = require('koa-static');
 var logger = require('koa-logger');
 var compress = require('koa-compress');
 var responseTime = require('koa-response-time');
@@ -42,7 +42,7 @@ app.use(function * (next) {
 app.use(logger());
 
 //client renderer
-app.use(static('dist/www'));
+app.use(serve('dist/www'));
 
 
 //games rest service
