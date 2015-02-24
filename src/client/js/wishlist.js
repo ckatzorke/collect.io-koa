@@ -30,7 +30,7 @@ var wishlist = (function ($) {
         $('#add2Wish').modal('hide');
         var entryHtml = template(entry);
         console.log('Entry HTML', entryHtml);
-        $('#addWishlistEntry').before(entryHtml);
+        $('#addWishlistEntry').after(entryHtml);
     };
     return {
         add: add
