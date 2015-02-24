@@ -3,14 +3,15 @@
 'use strict';
 
 var apikey = require('./apikey');
-var gb = require('giantbomb-api')(apikey
-                                 );
+var gb = require('giantbomb-api')(apikey);
 /**
  * search
  */
-exports.search = function *() {
+exports.search = function * () {
     if (this.request.query.q) {
-        var res = yield gb.search(this.request.query.q);
+        var res = {
+            results: yield gb.quicksearch(this.request.query.q)
+        };
         this.body = res;
     } else {
         this.response.status = 404;
@@ -19,7 +20,7 @@ exports.search = function *() {
 /**
  * derails
  */
-exports.detail = function *(id) {
+exports.detail = function * (id) {
     if (id) {
         var res = yield gb.detail(id);
         this.body = res;
