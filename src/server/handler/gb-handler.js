@@ -9,9 +9,7 @@ var gb = require('giantbomb-api')(apikey);
  */
 exports.search = function * () {
     if (this.request.query.q) {
-        var res = {
-            results: yield gb.quicksearch(this.request.query.q)
-        };
+        var res = yield gb.quicksearch(this.request.query.q);
         this.body = res;
     } else {
         this.response.status = 404;

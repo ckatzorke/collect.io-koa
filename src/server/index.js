@@ -46,8 +46,8 @@ app.use(serve('dist/www'));
 
 
 //games rest service
-app.use(route.get('/service/search', gbhandler.search));
-app.use(route.get('/service/detail/:id', gbhandler.detail));
+app.use(route.get('/gb/search', gbhandler.search));
+app.use(route.get('/gb/detail/:id', gbhandler.detail));
 
 
 if (!module.parent) {

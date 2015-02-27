@@ -4,7 +4,7 @@ var quicksearch = (function ($) {
     var template = Handlebars.compile(tSource);
     var search = function () {
         var value = $('#wishlistSearchInput').val();
-        $.getJSON('/service/search?q=' + value, function (data) {
+        $.getJSON('/gb/search?q=' + value, function (data) {
             console.log(data);
             var resultHtml = data.results.length === 0 ? 'No results...' : template(data);
             console.log(resultHtml);

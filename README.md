@@ -5,6 +5,10 @@ koa based web app for collecting games
 requires giantbomb-api, which is not an npm package. Clone from https://github.com/ckatzorke/giantbomb-api.git and use
 
     npm link
+
+in this directory, call
+    
+    npm link giantbomb-api
     
 # api key
 Make sure to place the api key in src/handler/apikey.js like
