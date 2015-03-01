@@ -1,3 +1,11 @@
+Handlebars.registerHelper('replace', function (text, needle, replace) {
+    'use strict';
+    var haystack = Handlebars.Utils.escapeExpression(text);
+    var n = new RegExp(needle, 'g');
+    var result = haystack.replace(n, replace);
+    return new Handlebars.SafeString(result);
+});
+
 var quicksearch = (function ($) {
     'use strict';
     var tSource = $('#searchresults-template').html();
@@ -20,10 +28,11 @@ var wishlist = (function ($) {
     'use strict';
     var tSource = $('#wishlist-entry-template').html();
     var template = Handlebars.compile(tSource);
-    var add = function (id, name, thumbUrl) {
+    var add = function (id, name, deck, thumbUrl) {
         var entry = {
             'id': id,
             'name': name,
+            'deck': deck,
             'thumb': thumbUrl
         };
         console.log('adding', entry);

@@ -16,7 +16,7 @@ exports.search = function * () {
     }
 };
 /**
- * derails
+ * details
  */
 exports.detail = function * (id) {
     if (id) {

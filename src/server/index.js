@@ -8,6 +8,7 @@ var logger = require('koa-logger');
 var compress = require('koa-compress');
 var responseTime = require('koa-response-time');
 var gbhandler = require('./handler/gb-handler.js');
+//var idxhandler = require('./handler/index-handler.js');
 
 
 var compressOpts = {
@@ -48,6 +49,7 @@ app.use(serve('dist/www'));
 //games rest service
 app.use(route.get('/gb/search', gbhandler.search));
 app.use(route.get('/gb/detail/:id', gbhandler.detail));
+//app.use(route.get('/idx/update', idxhandler.update));
 
 
 if (!module.parent) {
