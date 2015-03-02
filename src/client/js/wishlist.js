@@ -11,13 +11,17 @@ var quicksearch = (function ($) {
     var tSource = $('#searchresults-template').html();
     var template = Handlebars.compile(tSource);
     var search = function () {
-        var value = $('#wishlistSearchInput').val();
-        $.getJSON('/gb/search?q=' + value, function (data) {
-            console.log(data);
-            var resultHtml = data.results.length === 0 ? 'No results...' : template(data);
-            console.log(resultHtml);
-            $('#wishlist-searchresult').html(resultHtml);
+        var ret = new Promise(function (resolve, reject) {
+            var value = $('#wishlistSearchInput').val();
+            $.getJSON('/gb/search?q=' + value, function (data) {
+                console.log(data);
+                var resultHtml = data.results.length === 0 ? 'No results...' : template(data);
+                console.log(resultHtml);
+                $('#wishlist-searchresult').html(resultHtml);
+                resolve();
+            });
         });
+        return ret;
     };
     return {
         search: search
@@ -35,16 +39,21 @@ var wishlist = (function ($) {
             'deck': deck,
             'thumb': thumbUrl
         };
-        console.log('adding', entry);
-        $('#add2Wish').modal('hide');
-        var entryHtml = template(entry);
+        addGame(entry);
+        $('#addModal').modal('hide');
+    };
+    var addGame = function (game) {
+        collectioStorage.add(game);
+        console.log('adding', game);
+        var entryHtml = template(game);
         console.log('Entry HTML', entryHtml);
-        $('#addWishlistEntry').after(entryHtml);
+        $('#top-button-bar').after(entryHtml);
     };
     return {
-        add: add
+        add: add,
+        addGame: addGame
     };
-})(jQuery);
+}(jQuery));
 
 
 
@@ -57,5 +66,10 @@ $(document).ready(function () {
         if (e.which === 13) { //Enter key pressed
             $('#wishlistSearchBtn').click(); //Trigger search button click event
         }
+    });
+    collectioStorage.getAll().then(function (games) {
+        games.map(function (game) {
+            wishlist.addGame(game);
+        });
     });
 });

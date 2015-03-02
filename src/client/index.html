@@ -59,30 +59,37 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <div class="media wishlist-entry" id="addWishlistEntry">
-          <div class="media-left media-top wishlist-entry-image">
-            <a data-toggle="modal" data-target="#add2Wish" href="#" role="button" class="list-group-item">
-              <img class="media-object" src="images/add-128.png" alt="Add...">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">Add...</h4>
-          </div>
+        <div class="row" id="top-button-bar">
+            <div class="top-button">
+                <a href="#" class="btn btn-primary" id="category-slide-panel-opener"><i class="glyphicon glyphicon-menu-hamburger"></i></a>  
+            </div>
+            <div class="top-button">
+                <div class="btn-group">
+                  <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                    Sort order <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Name &#8593;</a></li>
+                      <li><a href="#">Name &#8595;</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+            </div>
+            <div class="top-button">
+                <button class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#addModal">
+                    <i class="glyphicon glyphicon-plus"></i></a>  
+                 </button>
+            </div>
+            <div id="category-slide-panel">
+               <ul class="nav nav-pills nav-stacked">
+                  <li role="presentation" class="active"><a href="#">All <span class="badge">4</span></a></li>
+                  <li role="presentation"><a href="#">PS4 <span class="badge">3</span></a></li>
+                  <li role="presentation"><a href="#">PSVita <span class="badge">1</span></a></li>
+                </ul>
+            </div>
         </div>
-        
-        <div class="media wishlist-entry">
-          <div class="media-left media-top wishlist-entry-image">
-            <a href="#">
-              <img class="media-object" src="images/nocover.gif" alt="...">
-            </a>
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">Middle aligned media</h4>
-            ...
-          </div>
-        </div>
-
 
         <hr>
 
@@ -99,13 +106,13 @@
     <!-- /.container -->
 
     <!-- Modal -->
-    <div class="modal fade" id="add2Wish" tabindex="-1" role="dialog" aria-labelledby="Add to Wishlist" aria-hidden="true">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="Add to Wishlist" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="add2WishLabel">Add to Wishlist</h4>
+                    <h4 class="modal-title" id="addModalLabel">Add to Wishlist</h4>
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
@@ -149,7 +156,7 @@
           </div>
           <div class="media-body">
             <h4 class="media-heading">{{name}}</h4>
-            <p>{{deck}}</p>
+            <p class="hidden-xs">{{deck}}</p>
           </div>
         </div>
     </script>
@@ -165,6 +172,8 @@
 
     <!-- custom js -->
     <script src="js/wishlist.js"></script>
+    <script src="js/collectio.js"></script>
+    <script src="js/collectio-storage.js"></script>
 </body>
 
 </html>
