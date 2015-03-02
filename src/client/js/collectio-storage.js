@@ -45,7 +45,7 @@ var collectioStorage = (function () {
         // Store values in the newly created objectStore.
         _getDB().then(function (db) {
             var gameObjectStore = db.transaction('games', 'readwrite').objectStore('games');
-            gameObjectStore.add(game);
+            var request = gameObjectStore.add(game);
             request.onsuccess = function (event) {
                 console.log('Entry added', game);
             };
