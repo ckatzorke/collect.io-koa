@@ -45,7 +45,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="#">Wishlist</a>
+                        <a href="#">Collection</a>
                     </li>
                     <li>
                         <a href="#">coming soon</a>
@@ -106,7 +106,7 @@
     <!-- /.container -->
 
     <!-- Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="Add to Wishlist" aria-hidden="true">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="Add to Collection" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -116,13 +116,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for..." id="wishlistSearchInput" autofocus>
+                        <input type="text" class="form-control" placeholder="Search for..." id="quickSearchInput" autofocus>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" id="wishlistSearchBtn">Go!</button>
+                            <button class="btn btn-default" type="button" id="quickSearchBtn">Go!</button>
                         </span>
                         <!-- /input-group -->
                     </div>
-                    <div id="wishlist-searchresult">
+                    <div id="searchresult">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -138,7 +138,7 @@
     <script id="searchresults-template" type="text/x-handlebars-template">
         <div class="list-group">
             {{#each results}}
-            <a href="#" onclick='wishlist.add("{{id}}", "{{name}}", "{{deck}}", "{{image.thumb_url}}")' class="list-group-item">
+            <a href="#" onclick='collection.add("{{id}}", "{{name}}", "{{deck}}", "{{image.thumb_url}}")' class="list-group-item">
                 <h4 class="list-group-item-heading">{{name}}</h4>
                 <p class="list-group-item-text">{{deck}}</p>
             </a>
@@ -146,17 +146,17 @@
         </div>
     </script>
 
-    <!-- wishlist entry template -->
-    <script id="wishlist-entry-template" type="text/x-handlebars-template">
+    <!-- collection entry template -->
+    <script id="collection-entry-template" type="text/x-handlebars-template">
        <div class="media wishlist-entry">
-          <div class="media-left media-top wishlist-entry-image">
+          <div class="media-left media-top collection-entry-image">
             <a href="#">
-              <img class="media-object" src="{{thumb}}" alt="{{name}}">
+              <img class="media-object" src="{{gamedetails.thumb}}" alt="{{gamedetails.name}}">
             </a>
           </div>
           <div class="media-body">
-            <h4 class="media-heading">{{name}}</h4>
-            <p class="hidden-xs">{{deck}}</p>
+            <h4 class="media-heading">{{gamedetails.name}}</h4>
+            <p class="hidden-xs">{{gamedetails.deck}}</p>
           </div>
         </div>
     </script>
@@ -171,7 +171,6 @@
     <script src="lib/handlebars/handlebars.min.js"></script>
 
     <!-- custom js -->
-    <script src="js/wishlist.js"></script>
     <script src="js/collectio.js"></script>
     <script src="js/collectio-storage.js"></script>
 </body>
