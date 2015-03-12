@@ -5,7 +5,7 @@ var collectioStorage = (function () {
 
     var _getDB = function () {
         var dbDeferred = new Promise(function (resolve, reject) {
-            var request = indexedDB.open(dbName, 1);
+            var request = indexedDB.open(dbName, 2);
 
             request.onerror = function (event) {
                 // Handle errors.
@@ -20,13 +20,21 @@ var collectioStorage = (function () {
                 // Create an objectStore to hold information about our games. We're
                 // going to use "id" as our key path because it's guaranteed to be
                 // unique
-                var objectStore = db.createObjectStore('games', {
+                var objectStore = db.createObjectStore('collection', {
                     keyPath: 'id'
                 });
 
                 // Create an index to search games by name. We may have duplicates
                 // so we can't use a unique index.
                 objectStore.createIndex('name', 'name', {
+                    unique: false
+                });
+                //index for date added
+                objectStore.createIndex('added', 'added', {
+                    unique: false
+                });
+                //index for date updated
+                objectStore.createIndex('updated', 'updated', {
                     unique: false
                 });
 
@@ -48,7 +56,7 @@ var collectioStorage = (function () {
     var addGame = function (game) {
         // Store values in the newly created objectStore.
         _getDB().then(function (db) {
-            var gameObjectStore = db.transaction('games', 'readwrite').objectStore('games');
+            var gameObjectStore = db.transaction('collection', 'readwrite').objectStore('collection');
             var request = gameObjectStore.add(game);
             request.onsuccess = function (event) {
                 console.log('Entry added', game);
@@ -63,8 +71,8 @@ var collectioStorage = (function () {
     var getGameById = function (id) {
         var gameDeferred = new Promise(function (resolve, reject) {
             _getDB().then(function (db) {
-                var transaction = db.transaction(['games']);
-                var objectStore = transaction.objectStore('games');
+                var transaction = db.transaction(['collection']);
+                var objectStore = transaction.objectStore('collection');
                 var request = objectStore.get(id);
                 request.onerror = function (event) {
                     // Handle errors!
@@ -81,7 +89,7 @@ var collectioStorage = (function () {
         var gamesDeferred = new Promise(function (resolve, reject) {
             _getDB().then(function (db) {
                 var games = [];
-                var objectStore = db.transaction('games').objectStore('games');
+                var objectStore = db.transaction('collection').objectStore('collection');
                 objectStore.openCursor().onsuccess = function (event) {
                     var cursor = event.target.result;
                     if (cursor) {
