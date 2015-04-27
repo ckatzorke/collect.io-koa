@@ -4,7 +4,7 @@
   "description": "koa based collection application for games",
   "main": "dist/server/index.js",
   "scripts": {
-    "start": "iojs dist/server/index.js",
+    "start": "iojs dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,13 +18,13 @@
   },
   "homepage": "https://github.com/ckatzorke/collect.io-koa",
   "dependencies": {
-    "koa": "^0.18.0",
+    "koa": "^0.18.1",
     "koa-compress": "^1.0.8",
     "koa-logger": "^1.2.2",
     "koa-response-time": "^1.0.2",
-    "koa-route": "^2.4.0",
+    "koa-route": "^2.4.1",
     "koa-static": "^1.4.9",
-    "log4js": "^0.6.22"
+    "log4js": "^0.6.24"
   },
   "devDependencies": {
     "del": "^1.1.1",

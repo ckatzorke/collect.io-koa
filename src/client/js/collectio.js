@@ -2,6 +2,9 @@ var collectio = (function ($) {
     'use strict';
 
     var collectionView = (function () {
+        var tSource = $('#collection-entry-template').html();
+        var template = Handlebars.compile(tSource);
+        
         var state = {
             sort: {
                 field: 'name',
@@ -15,10 +18,17 @@ var collectio = (function ($) {
             return false;
         };
 
+        var renderEntry = function (entry) {
+            var entryHtml = template(entry);
+            console.log('Entry HTML', entryHtml);
+            $('#top-button-bar').after(entryHtml);
+        };
+
         //public API
         return {
             'state': state,
-            'toggleCategoryPanel': toggleCategoryPanel
+            'toggleCategoryPanel': toggleCategoryPanel,
+            'renderEntry': renderEntry
         };
     }());
 
@@ -53,10 +63,9 @@ var quicksearch = (function ($) {
     };
 })(jQuery);
 
-var collection = (function ($) {
+var collection = (function () {
     'use strict';
-    var tSource = $('#collection-entry-template').html();
-    var template = Handlebars.compile(tSource);
+
     var add = function (id, name, deck, thumbUrl) {
         var entry = {
             'id': id,
@@ -65,7 +74,6 @@ var collection = (function ($) {
             'thumb': thumbUrl
         };
         addGame(entry);
-        $('#addModal').modal('hide');
     };
     var addGame = function (game) {
         var now = new Date();
@@ -76,18 +84,11 @@ var collection = (function ($) {
             'updated': now
         };
         collectioStorage.add(store);
-        console.log('adding', store);
-        renderEntry(store);
     };
-    var renderEntry = function (entry) {
-        var entryHtml = template(entry);
-        console.log('Entry HTML', entryHtml);
-        $('#top-button-bar').after(entryHtml);
-    };
+
     return {
         add: add,
         addGame: addGame,
-        renderEntry: renderEntry
     };
 }(jQuery));
 
@@ -109,7 +110,7 @@ $(document).ready(function () {
     });
     collectioStorage.getAll().then(function (games) {
         games.map(function (game) {
-            collection.renderEntry(game);
+            collectio.collectionView.renderEntry(game);
         });
     });
 });
